@@ -17,7 +17,7 @@ Tombloo.Service.extractors.register({
                 src : ctx.target.src.replace(/_(?:m|s|100)\.(png|gif|jpe?g)$/, '.$1'),
             };
         }
-        return Tombloo.Service.extractors['Photo - Upload from Cache'].extract(ctx);
+        return Tombloo.Service.extractors['Photo - Upload from Cache2'].extract(ctx);
   },
 }, 'Photo', false);
 })();

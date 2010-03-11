@@ -1,0 +1,44 @@
+--- 31_Tombloo.Service.extractors.js.org	2010-01-28 22:09:56.000000000 +0900
++++ 31_Tombloo.Service.extractors.js	2010-03-10 09:40:20.000000000 +0900
+@@ -1004,7 +1004,7 @@
+ 			ctx.target = {
+ 				src : ctx.link.href.replace('/l/im/', '/'),
+ 			};
+-			return Tombloo.Service.extractors['Photo - Upload from Cache'].extract(ctx);
++			return Tombloo.Service.extractors['Photo - Upload from Cache2'].extract(ctx);
+ 		}
+ 	},
+ 	
+@@ -1148,6 +1148,32 @@
+ 				ctx.title = ctx.href.split('/').pop();
+ 			
+ 			var target = ctx.target;
++			//var itemUrl = tagName(target)=='object'? target.data : target.src;
++			var tag = tagName(target);
++			var itemUrl =
++				tag=='object'? target.data :
++				tag=='img'? target.src : target.href;
++			
++			var uri = createURI(itemUrl);
++			return download(itemUrl, getTempDir()).addCallback(function(file){
++				return {
++					type    : 'photo',
++					item    : ctx.title,
++					itemUrl : itemUrl,
++					file    : file,
++				}
++			});
++		},
++	},
++
++	{
++		name : 'Photo - Upload from Cache2',
++		ICON : 'chrome://tombloo/skin/photo.png',
++		extract : function(ctx){
++			if(ctx.document.contentType.match(/^image/))
++				ctx.title = ctx.href.split('/').pop();
++			
++			var target = ctx.target;
+ 			var itemUrl = tagName(target)=='object'? target.data : target.src;
+ 			
+ 			var uri = createURI(itemUrl);
