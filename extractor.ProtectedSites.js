@@ -1,3 +1,4 @@
 Tombloo.Service.extractors['Photo'].PROTECTED_SITES.push(
-    '//livedoor.blogimg.jp/'
+    '//www.b-idol.com/',
+    '//s3.amazonaws.com/twitpic/'
 );
